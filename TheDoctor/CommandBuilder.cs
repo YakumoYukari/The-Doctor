@@ -18,7 +18,7 @@ namespace TheDoctor
 
         public void RegisterCommands()
         {
-            var Commands = new CommandLoader().AllCommands();
+            var Commands = new ObjectLoader<IBotCommand>().GetAll();
             foreach (var Command in Commands)
             {
                 _Commands.CreateCommand(Command.Command)

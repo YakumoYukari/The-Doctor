@@ -4,7 +4,7 @@ using Discord.Commands;
 
 namespace TheDoctor.Commands
 {
-    public interface IBotCommand
+    public interface IBotCommand : IMassInstantiable
     {
         string Command { get; }
         string Description { get; }

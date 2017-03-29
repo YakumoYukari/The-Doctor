@@ -80,12 +80,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatHandlers\IChatHandler.cs" />
+    <Compile Include="ChatHandlers\WikiSearchHandler.cs" />
     <Compile Include="CommandBuilder.cs" />
-    <Compile Include="Commands\CommandLoader.cs" />
+    <Compile Include="ObjectLoader.cs" />
     <Compile Include="Commands\IBotCommand.cs" />
     <Compile Include="Commands\MuteCommand.cs" />
     <Compile Include="DoctorBot.cs" />
-    <Compile Include="MessageHandler.cs" />
+    <Compile Include="IMassInstantiable.cs" />
+    <Compile Include="ChatHandlers\MessageManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

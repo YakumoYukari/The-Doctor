@@ -14,6 +14,7 @@ namespace TheDoctor.Commands
         };
 
         //Required for reflection to instantiate
+        // ReSharper disable once EmptyConstructor
         public MuteCommand() { }
     }
 }

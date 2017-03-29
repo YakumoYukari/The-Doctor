@@ -1,17 +1,18 @@
 ﻿using System.Configuration;
 using Discord;
+using TheDoctor.ChatHandlers;
 
 namespace TheDoctor
 {
     public class DoctorBot
     {
         private readonly DiscordClient _Client;
-        private readonly MessageHandler _Handler;
+        private readonly MessageManager _Handler;
 
         public DoctorBot()
         {
             _Client = new DiscordClient();
-            _Handler = new MessageHandler();
+            _Handler = new MessageManager();
             new CommandBuilder(this, _Client).RegisterCommands();
 
             HookMessageEvents();

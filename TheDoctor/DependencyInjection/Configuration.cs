@@ -11,15 +11,18 @@ namespace TheDoctor.DependencyInjection
         public Configuration() { }
         public override void Load()
         {
-            IoC.BindSelf<DiscordClient>();
+            IoC.BindSelf<DiscordClient>().AsSingleton();
             IoC.Bind<IBot, DoctorBot>().AsSingleton();
 
             IoC.Bind<IMessageRouter, MessageRouter>();
             IoC.Bind<ICommandBuilder, CommandBuilder>();
 
+            //Registered commands
             IoC.Bind<IBotCommand, MuteCommand>();
+            IoC.Bind<IBotCommand, UnmuteCommand>();
             IoC.Bind<IBotCommand, RecordCommand>();
 
+            //Registered chat handlers
             IoC.Bind<IChatHandler, WikiSearchHandler>();
         }
     }

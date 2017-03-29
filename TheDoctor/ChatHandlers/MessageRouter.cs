@@ -17,10 +17,12 @@ namespace TheDoctor.ChatHandlers
         public async Task HandleMessage(object Sender, MessageEventArgs Event)
         {
             if (Event.Message.IsAuthor) return;
-            var Handle = _Handlers.FirstOrDefault(H => H.CanHandle(Event))?.Handle(Event);
+            var Handlers = _Handlers.Where(H => H.CanHandle(Event));
 
-            if (Handle != null)
-                await Handle;
+            foreach (var Handler in Handlers)
+            {
+                await Handler.Handle(Event);
+            }
         }
     }
 }

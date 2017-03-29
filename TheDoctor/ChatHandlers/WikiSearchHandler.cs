@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Discord;
@@ -19,9 +20,12 @@ namespace TheDoctor.ChatHandlers
         public async Task Handle(MessageEventArgs Event)
         {
             string SearchTerm = Regex.Match(Event.Message.Text, @"\[\[(.*?)\]\]").Groups[1].Value;
-            if (string.IsNullOrWhiteSpace(SearchTerm))
+            if (string.IsNullOrWhiteSpace(SearchTerm) || SearchTerm.Length > 300)
                 return;
-            
+
+            if (LooksLikeSqlInjectionAttempt(SearchTerm))
+                await Event.Channel.SendMessage("That looks bad...");
+
             if (!CanRequestAgain())
                 return;
 
@@ -33,6 +37,10 @@ namespace TheDoctor.ChatHandlers
         {
             var Api = IoC.Get<IWikiApi>();
 
+            int LastSlash = SearchTerm.LastIndexOf('/');
+            if (SearchTerm.Contains("http") && LastSlash != SearchTerm.Length -1)
+                SearchTerm = SearchTerm.Substring(LastSlash + 1);
+
             var UrlSafe = Api.GetWikipediaLink(SearchTerm);
 
             string Html;
@@ -43,6 +51,15 @@ namespace TheDoctor.ChatHandlers
             }
 
             await ReportNoArticle(Event, SearchTerm);
+        }
+
+        private static bool LooksLikeSqlInjectionAttempt(string SearchTerm)
+        {
+            string[] Symbols = {";", "--"};
+            string[] SqlCommands = {"select", "drop", "update", "delete", "insert"};
+
+            return SqlCommands.Any(SearchTerm.ToLower().Contains)
+                   && Symbols.Any(SearchTerm.ToLower().Contains);
         }
 
         private async Task ReportNoArticle(MessageEventArgs Event, string SearchTerm)

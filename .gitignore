@@ -6,3 +6,11 @@ nunit_random_seed.tmp
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+TheDoctor.Library/bin
+TheDoctor.Library/obj
+TheDoctor.Tests/bin
+TheDoctor.Tests/obj
+TheDoctor/bin
+TheDoctor/obj
+packages/

@@ -89,6 +89,7 @@
     <Compile Include="ChatHandlers\WikiSearchHandler.cs" />
     <Compile Include="CommandBuilder.cs" />
     <Compile Include="Commands\RecordCommand.cs" />
+    <Compile Include="Commands\UnmuteCommand.cs" />
     <Compile Include="DependencyInjection\Configuration.cs" />
     <Compile Include="IBot.cs" />
     <Compile Include="ICommandBuilder.cs" />

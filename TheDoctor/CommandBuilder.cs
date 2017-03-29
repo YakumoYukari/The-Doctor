@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using TheDoctor.Commands;
+using TheDoctor.Library.DependencyInjection;
 
 namespace TheDoctor
 {
@@ -18,7 +19,7 @@ namespace TheDoctor
 
         public void RegisterCommands(IBot ToBot)
         {
-            var Commands = new ObjectLoader<IBotCommand>().GetAll();
+            var Commands = IoC.GetAll<IBotCommand>();
             foreach (var Command in Commands)
             {
                 _Commands.CreateCommand(Command.Command)

@@ -30,3 +30,6 @@ C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor.Tests\obj\Debug\TheDoctor.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor.Tests\obj\Debug\TheDoctor.Tests.dll
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor.Tests\obj\Debug\TheDoctor.Tests.pdb
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor.Tests\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor.Tests\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor.Tests\bin\Debug\HtmlAgilityPack.xml

@@ -22,3 +22,6 @@ C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\TheDoctor.Library.dll
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\TheDoctor.Library.pdb
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\Ninject.xml
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\HtmlAgilityPack.xml

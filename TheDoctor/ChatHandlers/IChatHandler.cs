@@ -3,7 +3,7 @@ using Discord;
 
 namespace TheDoctor.ChatHandlers
 {
-    public interface IChatHandler : IMassInstantiable
+    public interface IChatHandler
     {
         bool CanHandle(MessageEventArgs Event);
         Task Handle(MessageEventArgs Event);

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Discord;
-using RestSharp.Extensions.MonoHttp;
+using TheDoctor.Library.API.Wikipedia;
+using TheDoctor.Library.DependencyInjection;
 
 namespace TheDoctor.ChatHandlers
 {
@@ -29,38 +29,25 @@ namespace TheDoctor.ChatHandlers
             await FetchWikiArticle(Event, SearchTerm);
         }
 
-        private static async Task FetchWikiArticle(MessageEventArgs Event, string SearchTerm)
+        private async Task FetchWikiArticle(MessageEventArgs Event, string SearchTerm)
         {
-            string UrlSafe = GetWikipediaLink(SearchTerm);
+            var Api = IoC.Get<IWikiApi>();
 
-            using (var Web = new WebClient())
+            var UrlSafe = Api.GetWikipediaLink(SearchTerm);
+
+            string Html;
+            if (Api.TryGetArticle(UrlSafe, out Html))
             {
-                try
-                {
-                    string Html = await Web.DownloadStringTaskAsync(new Uri(UrlSafe));
-                    if (Html.Contains("Wikipedia does not have an article with this exact name."))
-                    {
-                        await ReportNoArticle(Event, SearchTerm);
-                    }
-
-                    await Event.Channel.SendMessage(UrlSafe);
-                }
-                // ReSharper disable once UnusedVariable
-                catch (WebException Ex)
-                {
-                    await ReportNoArticle(Event, SearchTerm);
-                }
+                await Event.Channel.SendMessage(UrlSafe.AbsoluteUri);
+                return;
             }
+
+            await ReportNoArticle(Event, SearchTerm);
         }
 
-        private static async Task ReportNoArticle(MessageEventArgs Event, string SearchTerm)
+        private async Task ReportNoArticle(MessageEventArgs Event, string SearchTerm)
         {
             await Event.Channel.SendMessage($"No Wikipedia article found for: {SearchTerm}");
-        }
-
-        private static string GetWikipediaLink(string SearchTerm)
-        {
-            return $"https://en.wikipedia.org/wiki/{HttpUtility.UrlEncode(SearchTerm.Replace(" ", "_"))}";
         }
 
         private bool CanRequestAgain()

@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Ninject.Modules;
 using TheDoctor.ChatHandlers;
+using TheDoctor.Commands;
 using TheDoctor.Library.DependencyInjection;
 
 namespace TheDoctor.DependencyInjection
@@ -15,6 +16,11 @@ namespace TheDoctor.DependencyInjection
 
             IoC.Bind<IMessageRouter, MessageRouter>();
             IoC.Bind<ICommandBuilder, CommandBuilder>();
+
+            IoC.Bind<IBotCommand, MuteCommand>();
+            IoC.Bind<IBotCommand, RecordCommand>();
+
+            IoC.Bind<IChatHandler, WikiSearchHandler>();
         }
     }
 }

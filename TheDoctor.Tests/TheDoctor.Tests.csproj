@@ -66,6 +66,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LibraryTests\ApiTests\WikipediaTests\WikipediaTests.cs" />
+    <Compile Include="LibraryTests\WebTests\WebTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

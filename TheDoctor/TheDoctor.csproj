@@ -92,11 +92,9 @@
     <Compile Include="DependencyInjection\Configuration.cs" />
     <Compile Include="IBot.cs" />
     <Compile Include="ICommandBuilder.cs" />
-    <Compile Include="ObjectLoader.cs" />
     <Compile Include="Commands\IBotCommand.cs" />
     <Compile Include="Commands\MuteCommand.cs" />
     <Compile Include="DoctorBot.cs" />
-    <Compile Include="IMassInstantiable.cs" />
     <Compile Include="ChatHandlers\MessageRouter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

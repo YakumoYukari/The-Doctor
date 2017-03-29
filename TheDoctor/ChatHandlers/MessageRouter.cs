@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Discord;
+using TheDoctor.Library.DependencyInjection;
 
 namespace TheDoctor.ChatHandlers
 {
@@ -10,7 +11,7 @@ namespace TheDoctor.ChatHandlers
         private readonly List<IChatHandler> _Handlers;
         public MessageRouter()
         {
-            _Handlers = new ObjectLoader<IChatHandler>().GetAll().ToList();
+            _Handlers = IoC.GetAll<IChatHandler>().ToList();
         }
 
         public async Task HandleMessage(object Sender, MessageEventArgs Event)

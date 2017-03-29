@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Discord;
 using RestSharp.Extensions.MonoHttp;
@@ -9,19 +9,29 @@ namespace TheDoctor.ChatHandlers
 {
     public class WikiSearchHandler : IChatHandler
     {
+        private DateTime _LastRequestTime;
+
         public bool CanHandle(MessageEventArgs Event)
         {
-            return Event.Message.Text.StartsWith("[[")
-                   && Event.Message.Text.EndsWith("]]");
+            return Regex.IsMatch(Event.Message.Text, @"^.*?\[\[(.*?)\]\].*$");
         }
 
         public async Task Handle(MessageEventArgs Event)
         {
-            string SearchTerm = Event.Message.Text.TrimStart('[').TrimEnd(']');
+            string SearchTerm = Regex.Match(Event.Message.Text, @"\[\[(.*?)\]\]").Groups[1].Value;
             if (string.IsNullOrWhiteSpace(SearchTerm))
                 return;
+            
+            if (!CanRequestAgain())
+                return;
 
-            string UrlSafe = $"https://en.wikipedia.org/wiki/{HttpUtility.UrlEncode(SearchTerm.Replace(" ", "_"))}";
+            _LastRequestTime = DateTime.UtcNow;
+            await FetchWikiArticle(Event, SearchTerm);
+        }
+
+        private static async Task FetchWikiArticle(MessageEventArgs Event, string SearchTerm)
+        {
+            string UrlSafe = GetWikipediaLink(SearchTerm);
 
             using (var Web = new WebClient())
             {
@@ -30,17 +40,32 @@ namespace TheDoctor.ChatHandlers
                     string Html = await Web.DownloadStringTaskAsync(new Uri(UrlSafe));
                     if (Html.Contains("Wikipedia does not have an article with this exact name."))
                     {
-                        await Event.Channel.SendMessage($"No Wikipedia article found for: {SearchTerm}");
+                        await ReportNoArticle(Event, SearchTerm);
                     }
 
                     await Event.Channel.SendMessage(UrlSafe);
                 }
                 // ReSharper disable once UnusedVariable
-                catch (HttpRequestException Ex)
+                catch (WebException Ex)
                 {
-                    //Disregard 404 errors
+                    await ReportNoArticle(Event, SearchTerm);
                 }
             }
+        }
+
+        private static async Task ReportNoArticle(MessageEventArgs Event, string SearchTerm)
+        {
+            await Event.Channel.SendMessage($"No Wikipedia article found for: {SearchTerm}");
+        }
+
+        private static string GetWikipediaLink(string SearchTerm)
+        {
+            return $"https://en.wikipedia.org/wiki/{HttpUtility.UrlEncode(SearchTerm.Replace(" ", "_"))}";
+        }
+
+        private bool CanRequestAgain()
+        {
+            return DateTime.UtcNow - _LastRequestTime > TimeSpan.FromSeconds(2);
         }
     }
 }

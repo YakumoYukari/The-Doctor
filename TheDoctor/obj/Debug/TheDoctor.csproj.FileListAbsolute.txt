@@ -18,3 +18,7 @@ C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\obj\Debug\TheDoctor.csprojResolveAssemblyReference.cache
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\obj\Debug\TheDoctor.exe
 C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\obj\Debug\TheDoctor.pdb
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\Ninject.dll
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\TheDoctor.Library.dll
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\TheDoctor.Library.pdb
+C:\Users\Lukez_000\Documents\Visual Studio 2015\Projects\Console Apps\TheDoctor\TheDoctor\bin\Debug\Ninject.xml

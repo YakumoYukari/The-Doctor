@@ -4,16 +4,16 @@ using TheDoctor.ChatHandlers;
 
 namespace TheDoctor
 {
-    public class DoctorBot
+    public class DoctorBot : IBot
     {
-        public DiscordClient Client { get; }
-        private readonly MessageManager _Handler;
+        private readonly DiscordClient _Client;
+        private readonly IMessageRouter _Handler;
 
-        public DoctorBot()
+        public DoctorBot(DiscordClient Client, IMessageRouter Handler, ICommandBuilder Commands)
         {
-            Client = new DiscordClient();
-            _Handler = new MessageManager();
-            new CommandBuilder(this, Client).RegisterCommands();
+            _Client = Client;
+            _Handler = Handler;
+            Commands.RegisterCommands(this);
 
             HookMessageEvents();
         }
@@ -25,7 +25,7 @@ namespace TheDoctor
 
         private void HookMessageEvents()
         {
-            Client.MessageReceived += async (Sender, Event) =>
+            _Client.MessageReceived += async (Sender, Event) =>
             {
                 if (!Event.Message.IsAuthor && CanSpeak())
                     await _Handler.HandleMessage(Sender, Event);
@@ -34,9 +34,9 @@ namespace TheDoctor
 
         public void Run()
         {
-            Client.ExecuteAndWait(async () =>
+            _Client.ExecuteAndWait(async () =>
             {
-                await Client.Connect(ConfigurationManager.AppSettings["AuthenticationToken"], TokenType.Bot);
+                await _Client.Connect(ConfigurationManager.AppSettings["AuthenticationToken"], TokenType.Bot);
             });
         }
 

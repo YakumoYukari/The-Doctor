@@ -8,6 +8,6 @@ namespace TheDoctor.Commands
     {
         string Command { get; }
         string Description { get; }
-        Func<CommandEventArgs, DoctorBot, Task> Function { get; }
+        Func<CommandEventArgs, IBot, Task> Function { get; }
     }
 }

@@ -8,7 +8,7 @@ namespace TheDoctor.Commands
     {
         public string Command { get; } = "shutup";
         public string Description { get; } = "Goes against your doctor's professional advice.";
-        public Func<CommandEventArgs, DoctorBot, Task> Function { get; } = async (Event, Bot) => {
+        public Func<CommandEventArgs, IBot, Task> Function { get; } = async (Event, Bot) => {
             await Event.Channel.SendMessage("Well, I never!");
             Bot.IsMuted = true;
         };

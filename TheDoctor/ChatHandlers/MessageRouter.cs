@@ -5,10 +5,10 @@ using Discord;
 
 namespace TheDoctor.ChatHandlers
 {
-    public class MessageManager
+    public class MessageRouter : IMessageRouter
     {
         private readonly List<IChatHandler> _Handlers;
-        public MessageManager()
+        public MessageRouter()
         {
             _Handlers = new ObjectLoader<IChatHandler>().GetAll().ToList();
         }

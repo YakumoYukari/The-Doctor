@@ -17,7 +17,7 @@ namespace TheDoctor.Commands
 
         private const string CommandFormat = @"-([mt]) (\d+)( .*)?$";
 
-        public Func<CommandEventArgs, DoctorBot, Task> Function { get; } = async (Event, Bot) =>
+        public Func<CommandEventArgs, IBot, Task> Function { get; } = async (Event, Bot) =>
         {
             string Args = Event.GetArg(CommandBuilder.Args).Trim();
             if (!Regex.IsMatch(Args, CommandFormat))

@@ -4,21 +4,19 @@ using TheDoctor.Commands;
 
 namespace TheDoctor
 {
-    public class CommandBuilder
+    public class CommandBuilder : ICommandBuilder
     {
         public const string Args = "Args";
-
-        private readonly DoctorBot _Bot;
+        
         private readonly CommandService _Commands;
 
-        public CommandBuilder(DoctorBot Bot, DiscordClient Client)
+        public CommandBuilder(DiscordClient Client)
         {
-            _Bot = Bot;
             _Commands = Client.AddService(
                 new CommandService(new CommandServiceConfigBuilder {HelpMode = HelpMode.Public, PrefixChar = '!'}));
         }
 
-        public void RegisterCommands()
+        public void RegisterCommands(IBot ToBot)
         {
             var Commands = new ObjectLoader<IBotCommand>().GetAll();
             foreach (var Command in Commands)
@@ -26,7 +24,7 @@ namespace TheDoctor
                 _Commands.CreateCommand(Command.Command)
                     .Description(Command.Description)
                     .Parameter("Args", ParameterType.Unparsed)
-                    .Do(Event => Command.Function(Event, _Bot));
+                    .Do(Event => Command.Function(Event, ToBot));
             }
         }
     }

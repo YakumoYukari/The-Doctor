@@ -49,6 +49,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Nito.AsyncEx, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.dll</HintPath>
       <Private>True</Private>
@@ -81,21 +85,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChatHandlers\IChatHandler.cs" />
+    <Compile Include="ChatHandlers\IMessageRouter.cs" />
     <Compile Include="ChatHandlers\WikiSearchHandler.cs" />
     <Compile Include="CommandBuilder.cs" />
     <Compile Include="Commands\RecordCommand.cs" />
+    <Compile Include="DependencyInjection\Configuration.cs" />
+    <Compile Include="IBot.cs" />
+    <Compile Include="ICommandBuilder.cs" />
     <Compile Include="ObjectLoader.cs" />
     <Compile Include="Commands\IBotCommand.cs" />
     <Compile Include="Commands\MuteCommand.cs" />
     <Compile Include="DoctorBot.cs" />
     <Compile Include="IMassInstantiable.cs" />
-    <Compile Include="ChatHandlers\MessageManager.cs" />
+    <Compile Include="ChatHandlers\MessageRouter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TheDoctor.Library\TheDoctor.Library.csproj">
+      <Project>{2cdddfaf-a8e7-434d-8f82-19270cb19bda}</Project>
+      <Name>TheDoctor.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

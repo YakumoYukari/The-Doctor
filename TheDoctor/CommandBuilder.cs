@@ -6,6 +6,8 @@ namespace TheDoctor
 {
     public class CommandBuilder
     {
+        public const string Args = "Args";
+
         private readonly DoctorBot _Bot;
         private readonly CommandService _Commands;
 
@@ -23,6 +25,7 @@ namespace TheDoctor
             {
                 _Commands.CreateCommand(Command.Command)
                     .Description(Command.Description)
+                    .Parameter("Args", ParameterType.Unparsed)
                     .Do(Event => Command.Function(Event, _Bot));
             }
         }

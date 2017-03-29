@@ -83,6 +83,7 @@
     <Compile Include="ChatHandlers\IChatHandler.cs" />
     <Compile Include="ChatHandlers\WikiSearchHandler.cs" />
     <Compile Include="CommandBuilder.cs" />
+    <Compile Include="Commands\RecordCommand.cs" />
     <Compile Include="ObjectLoader.cs" />
     <Compile Include="Commands\IBotCommand.cs" />
     <Compile Include="Commands\MuteCommand.cs" />

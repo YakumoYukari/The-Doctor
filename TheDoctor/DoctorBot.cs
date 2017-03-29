@@ -6,14 +6,14 @@ namespace TheDoctor
 {
     public class DoctorBot
     {
-        private readonly DiscordClient _Client;
+        public DiscordClient Client { get; }
         private readonly MessageManager _Handler;
 
         public DoctorBot()
         {
-            _Client = new DiscordClient();
+            Client = new DiscordClient();
             _Handler = new MessageManager();
-            new CommandBuilder(this, _Client).RegisterCommands();
+            new CommandBuilder(this, Client).RegisterCommands();
 
             HookMessageEvents();
         }
@@ -25,7 +25,7 @@ namespace TheDoctor
 
         private void HookMessageEvents()
         {
-            _Client.MessageReceived += async (Sender, Event) =>
+            Client.MessageReceived += async (Sender, Event) =>
             {
                 if (!Event.Message.IsAuthor && CanSpeak())
                     await _Handler.HandleMessage(Sender, Event);
@@ -34,9 +34,9 @@ namespace TheDoctor
 
         public void Run()
         {
-            _Client.ExecuteAndWait(async () =>
+            Client.ExecuteAndWait(async () =>
             {
-                await _Client.Connect(ConfigurationManager.AppSettings["AuthenticationToken"], TokenType.Bot);
+                await Client.Connect(ConfigurationManager.AppSettings["AuthenticationToken"], TokenType.Bot);
             });
         }
 
